@@ -1,0 +1,7 @@
+<div class="text-center">
+  <h2>Welcome to Sign In Procedure</h1>
+  <p>We currently have login with <%= link("slack",to: "https://slack.com/", target: "_blank")%> only. 
+  </p>
+  <%= button("Sign Me In", to: session_path(@conn, :slackLogin), class: "btn btn-success")%>
+
+</div>

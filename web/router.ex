@@ -17,7 +17,10 @@ defmodule Spaces.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/sign_in", SessionController, :new
+    # get "/sign_in", SessionController, :new
+
+    resources "/session", SessionController, only: [:index, :new]
+    post "/session/slackLogin", SessionController, :slackLogin
 
   end
 
