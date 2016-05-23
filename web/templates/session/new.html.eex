@@ -1,0 +1,3 @@
+<%= unless get_flash(@conn, :error) do %>
+  <p><%#= get_flash(@conn, :error)%></p>
+<% end %>
