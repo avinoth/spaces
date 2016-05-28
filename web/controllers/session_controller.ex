@@ -1,6 +1,5 @@
 defmodule Spaces.SessionController do
   use Spaces.Web, :controller
-  require IEx
 
   def index(conn, _params) do
     render conn, "index.html"
