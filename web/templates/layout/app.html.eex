@@ -16,11 +16,10 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <% team_name = Plug.Conn.get_session(@conn, :user) %>
-            <%= if is_nil(team_name) do %>
+            <%= if is_nil(Plug.Conn.get_session(@conn, :user)) do %>
               <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
             <% else %>
-              <li><%= button(team_name, to: "/signout")%></li>
+              <li><%= button("Sign Out", method: "delete", to: session_path(@conn, :destroy))%></li>
             <% end %>
           </ul>
         </nav>

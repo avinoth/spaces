@@ -19,8 +19,9 @@ defmodule Spaces.Router do
     get "/", PageController, :index
     get "/loggedIn", PageController, :loggedIn
 
-    resources "/session", SessionController, only: [:index, :new, :destroy]
+    resources "/session", SessionController, only: [:index, :new]
     post "/session/slackLogin", SessionController, :slackLogin
+    delete "/session/destroy", SessionController, :destroy 
 
   end
 
