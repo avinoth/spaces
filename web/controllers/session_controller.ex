@@ -10,15 +10,17 @@ defmodule Spaces.SessionController do
 
   def slackLogin(conn, _params) do
     url_params = %{client_id: "35296394051.35346594944", scope: "users:read", redirect_uri: session_url(conn, :new)}
-    redirect_url = %URI{path: "https://slack.com/oauth/authorize", query: URI.encode_query(url_params)}
-    |> URI.to_string
+    redirect_url = 
+      %URI{path: "https://slack.com/oauth/authorize", query: URI.encode_query(url_params)}
+      |> URI.to_string
     redirect conn, external: redirect_url 
   end  
 
   def new(conn, %{"code" => code}) do
     url_params = %{client_id: "35296394051.35346594944", client_secret: "b19768c064c2825465b668bf74e7b46b", redirect_uri: session_url(conn, :new), code: code}
-    get_url = %URI{path: "https://slack.com/api/oauth.access", query: URI.encode_query(url_params)}
-    |> URI.to_string
+    get_url = 
+      %URI{path: "https://slack.com/api/oauth.access", query: URI.encode_query(url_params)}
+      |> URI.to_string
     
     case HTTPoison.get(get_url) do
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
