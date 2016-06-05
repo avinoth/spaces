@@ -1,5 +1,7 @@
 defmodule Spaces.SessionController do
   use Spaces.Web, :controller
+  alias Spaces.User
+
   require IEx
 
   def index(conn, _params) do
@@ -27,18 +29,17 @@ defmodule Spaces.SessionController do
             conn = put_flash(conn, :error, "Error in repsone that was received from slack")
           _ ->
             conn = set_user_from_response(conn, body)
-            # 
         end
       {:error, %HTTPoison.Error{reason: reason}} ->
           conn = put_flash(conn, :error, "Bad Request sent to slack")
     end
-    render conn, "new.html"
+    redirect(conn, to: page_path(conn, :index))
   end
 
   def destroy(conn, _params) do
     conn
     |> clear_session
-    |> redirect to: page_path(conn, :index)
+    |> redirect(to: page_path(conn, :index))
   end
 
   defp set_user_from_response(conn, body) do
@@ -49,13 +50,24 @@ defmodule Spaces.SessionController do
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
        %{"user" => %{"id" => slack_id , "name" => name, "profile" => %{"real_name" => real_name}}} = Poison.decode!(body)
        conn = put_session(conn, :user, [team_name: team_name, team_id: team_id, user_id: user_id])
+       if team_id do #TODO: Check if team id belongs to RealImage Team id
+        if Repo.get_by(User, slack_id: slack_id) |> is_nil do
+         changeset = User.changeset(%User{}, %{name: real_name, slack_name: name, slack_id: slack_id})
+         case Repo.insert(changeset) do
+           {:ok, _user} ->
+             put_flash(conn, :info, "User created successfully.")
+           {:error, changeset} ->
+             put_flash(conn, :error, "Error when creating User, check with Admin #{changeset.errors}")
+            end
+        else
+          put_flash(conn, :info, "Welcome Back")
+        end
+       else
+         put_flash(conn, :info, "Apologies, we currently allow on Real Image Team Memebers")
+       end
       {:error, %HTTPoison.Error{reason: reason}} ->
-        conn = put_flash(conn, :error, "Error in repsone when using API call to get user info from token")
+        put_flash(conn, :error, "Error in repsone when using API call to get user info from token")
     end  
-
-    repsone = HTTPoison.get(get_url)   
-
-    conn
   end
 
 
