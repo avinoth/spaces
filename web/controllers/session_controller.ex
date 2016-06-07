@@ -17,7 +17,7 @@ defmodule Spaces.SessionController do
   end  
 
   def new(conn, %{"code" => code}) do
-    url_params = %{client_id: "35296394051.35346594944", client_secret: "b19768c064c2825465b668bf74e7b46b", redirect_uri: session_url(conn, :new), code: code}
+    url_params = %{client_id: System.get_env("SLACK_CLIENT_ID"), client_secret: System.get_env("SLACK_CLIENT_SECRET"), redirect_uri: session_url(conn, :new), code: code}
     get_url = 
       %URI{path: "https://slack.com/api/oauth.access", query: URI.encode_query(url_params)}
       |> URI.to_string
@@ -32,6 +32,7 @@ defmodule Spaces.SessionController do
           _ ->
             conn = set_user_from_response(conn, body)
         end
+
       {:error, %HTTPoison.Error{reason: reason}} ->
           conn = put_flash(conn, :error, "Bad Request sent to slack")
     end
