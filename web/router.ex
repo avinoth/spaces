@@ -21,8 +21,9 @@ defmodule Spaces.Router do
 
     resources "/session", SessionController, only: [:index, :new]
     post "/session/slackLogin", SessionController, :slackLogin
-    delete "/session/destroy", SessionController, :destroy 
+    delete "/session/destroy", SessionController, :destroy
 
+    get "/user", UsersController, :show
   end
 
   # Other scopes may use custom stacks.

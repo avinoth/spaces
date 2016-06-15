@@ -52,10 +52,12 @@ defmodule Spaces.SessionController do
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
        %{"user" => %{"id" => slack_id , "name" => name, "profile" => %{"real_name" => real_name}}} = Poison.decode!(body)
        if team_id == System.get_env("REAL_IMAGE_TEAM_ID") do 
-        if Repo.get_by(User, slack_id: slack_id) |> is_nil do
+        user = Repo.get_by(User, slack_id: slack_id)
+        if user |> is_nil do
          changeset = User.changeset(%User{}, %{name: real_name, slack_name: name, slack_id: slack_id})
          case Repo.insert(changeset) do
-           {:ok, _user} ->
+           {:ok, user_created} ->
+             user = user_created
              put_flash(conn, :info, "User created successfully.")
            {:error, changeset} ->
              conn = put_flash(conn, :error, "Error when creating User, check with Admin #{changeset.errors}")
@@ -63,9 +65,9 @@ defmodule Spaces.SessionController do
         else
           conn = put_flash(conn, :info, "Welcome Back")
         end
-        put_session(conn, :user, [team_name: team_name, team_id: team_id, user_id: user_id])
+        put_session(conn, :user, %{team_name: team_name, team_id: team_id, user_id: user.id, user_name: name})
        else
-         put_flash(conn, :error, "Apologies, we currently allow on Real Image Team Memebers")
+        put_flash(conn, :error, "Apologies, we currently allow on Real Image Team Memebers")
        end
       {:error, %HTTPoison.Error{reason: reason}} ->
         put_flash(conn, :error, "Error in repsone when using API call to get user info from token- #{reason}")

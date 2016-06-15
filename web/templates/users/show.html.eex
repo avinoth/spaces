@@ -1,0 +1,4 @@
+<div class="text-center">
+  <h5>Hello <%= @user_name%>    
+  </h5>
+</div>
