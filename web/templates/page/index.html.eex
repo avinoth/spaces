@@ -1,7 +1,11 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Spaces!" %></h2>
   <p class="lead">Sharing snippets on the go</p>
-  <a href="<%= session_path(@conn, :index)%>" class="btn btn-success">Sign In Page</a>
+  <%= if signed_in?(@conn) do %>
+   <a href="<%= session_path(@conn, :index)%>" class="btn btn-success">Sign In Page</a> 
+  <% else %>
+   <a href="<%= users_path(@conn, :show)%>" class="btn btn-success">My DashBoard</a>
+  <% end %>
   <%#= link("Sign In Page", to: "/sign_in", class: "btn btn-success")%>
 </div>
 
