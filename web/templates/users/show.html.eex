@@ -1,4 +1,13 @@
-<div class="text-center">
-  <h5>Hello <%= @user_name%>    
-  </h5>
+<div class="text-center clearfix">
+  <span class="text-center">Hello <%= @user_name%></span>  
+  <span class="pull-right"><%= link("Create Post", to: post_path(@conn, :new))%></span>
 </div>
+<%= for post <- @posts do %>
+  <div class="post-container text-center">
+    <div class="post-title"><%= post.title%></div>
+    <div class="post-body"><%= post.content%></div>
+    <div class="post-open-link"><%=link("Continue Reading", to: post_path(@conn, :show, post.id)) %></div>
+  </div>
+<% end %>
+  
+  

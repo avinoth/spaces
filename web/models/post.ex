@@ -10,8 +10,8 @@ defmodule Spaces.Post do
     timestamps
   end
 
-  @required_fields ~w(title content tags)
-  @optional_fields ~w()
+  @required_fields ~w(title content)
+  @optional_fields ~w(user_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -22,5 +22,7 @@ defmodule Spaces.Post do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_length(:content, min: 2)
+    |> validate_length(:content, max: 500)
   end
 end

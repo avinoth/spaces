@@ -1,0 +1,12 @@
+<h2><%= @post.title %></h2>
+<p><%= @post.content %></p>
+  
+
+<div class="post-created-at">Created On: <span><%=@post.inserted_at%></span></div>
+
+
+<div class="post-nav">
+  <%= link "Edit", to: post_path(@conn, :edit, @post) %>
+  <%= link "Back", to: users_path(@conn, :show) %>
+  <%= link "Delete", to: post_path(@conn, :delete, @post), class: "delete", method: "delete" %>
+</div>
