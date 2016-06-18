@@ -1,11 +1,11 @@
-<div class="text-center clearfix">
-  <span class="text-center">Hello <%= @user_name%></span>  
+<div class="user-header text-left clearfix">
+  <span class="">Hello <span class="username"><%= @user_name%></span></span>  
   <span class="pull-right"><%= link("Create Post", to: post_path(@conn, :new))%></span>
 </div>
 <%= for post <- @posts do %>
   <div class="post-container text-center">
     <div class="post-title"><%= post.title%></div>
-    <div class="post-body"><%= post.content%></div>
+    <div class="post-body"><%= truncate(post.content, length: 500)%></div>
     <div class="post-open-link"><%=link("Continue Reading", to: post_path(@conn, :show, post.id)) %></div>
   </div>
 <% end %>

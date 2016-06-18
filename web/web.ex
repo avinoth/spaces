@@ -48,6 +48,7 @@ defmodule Spaces.Web do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use Phoenix.HTML.SimplifiedHelpers
 
       import Spaces.Router.Helpers
       import Spaces.ErrorHelpers

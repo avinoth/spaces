@@ -17,14 +17,14 @@ defmodule Spaces.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    # post_params = Map.put(post_params, "user_id", get_session(conn, :user) |> Map.get(:user_id))
+    post_params = Map.put(post_params, "user_id", get_session(conn, :user) |> Map.get(:user_id))
     changeset = Post.changeset(%Post{}, post_params)
 
     case Repo.insert(changeset) do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to:  users_path(conn, :show))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

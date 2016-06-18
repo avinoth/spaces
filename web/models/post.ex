@@ -11,7 +11,7 @@ defmodule Spaces.Post do
   end
 
   @required_fields ~w(title content)
-  @optional_fields ~w(user_id)
+  @optional_fields ~w(user_id tags)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -23,6 +23,6 @@ defmodule Spaces.Post do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:content, min: 2)
-    |> validate_length(:content, max: 500)
+    |> validate_length(:content, max: 2000)
   end
 end

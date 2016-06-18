@@ -19,7 +19,7 @@ defmodule Spaces.Mixfile do
   def application do
     [mod: {Spaces, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpoison, :jsx]]
+                    :phoenix_ecto, :postgrex, :httpoison, :jsx, :phoenix_html_simplified_helpers]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule Spaces.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.8.0"},
-     {:jsx, "~> 2.8"}]
+     {:jsx, "~> 2.8"},
+     {:phoenix_html_simplified_helpers, "~> 0.3.3"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

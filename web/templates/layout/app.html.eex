@@ -7,14 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Spaces!</title>
+    <title>Spaces!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/user_styles.css") %>">
   </head>
 
   <body>
     <div class="container">
-      <header class="header">
+      <header class="header text-center">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
             <%= if !is_nil(Plug.Conn.get_session(@conn, :user)) do %>
@@ -22,7 +22,7 @@
             <% end %>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <span class="logo-header">Spaces</span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
