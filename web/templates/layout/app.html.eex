@@ -15,14 +15,14 @@
   <body>
     <div class="container">
       <header class="header text-center">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+        <%# <nav role="navigation">
+          <ul class="nav nav-pills"> %>
             <%= if !is_nil(Plug.Conn.get_session(@conn, :user)) do %>
-              <li><%= button("Sign Out", method: "delete", to: session_path(@conn, :destroy), class: "btn btn-danger")%></li>
+              <%= button("Sign Out", method: "delete", to: session_path(@conn, :destroy), class: "btn btn-danger sign-out-btn")%>
             <% end %>
-          </ul>
-        </nav>
-        <span class="logo-header">Spaces</span>
+          <%# </ul>
+        </nav> %>
+        <a href="<%=users_path(@conn, :show)%>"><span class="logo-header">Spaces</span></a>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
