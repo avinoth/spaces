@@ -1,0 +1,92 @@
+.post-container {
+  margin: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #a8a2a2;
+  border-radius: 10px;
+  height: 200px;
+  background-color: #616669;
+  color: white;
+  position: relative;
+}
+
+.post-title{
+  padding: 5px;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.post-body{
+  padding: 10px;
+  padding-bottom: 15px;
+}
+
+.post-open-link{
+  position: absolute;
+  bottom: 2%;
+  right: 1%;
+}
+
+.post-open-link a{
+  color: #ddc8c5;
+  font-weight: 600;
+}
+
+.post-created-at span{
+  padding-left: 5px;
+}
+
+.post-nav{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.post-nav a{
+  color: #4b78b3;
+  padding-right: 10px;
+  font-size: 1.1em; 
+}
+
+.post-nav a.delete{
+  color: red;
+}
+
+.header{
+  border-bottom: none;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.logo-header{
+  font-size: 3.3em;
+  text-transform: capitalize;
+  color: rgb(255, 138, 108);
+  text-shadow: 2px 2px 4px #3C0B0B;
+  text-decoration: none;
+}
+
+header a:hover{
+  text-decoration: none !important;
+}
+
+.sign-out-btn{
+  position: absolute;
+  height: 35px;
+  top: 33%;
+  right: 0;
+}
+
+.user-header{
+  margin-bottom: 30px;
+}
+
+.user-header .username{
+  color: #f36e26;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
+}

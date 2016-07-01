@@ -19,6 +19,12 @@ defmodule Spaces.Post do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
+  # def user_posts(query, user) do
+  #   for p in query,
+  #     join: u in assoc(p, :user),
+  #     where: u.id == ^user.id
+  # end
+
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
