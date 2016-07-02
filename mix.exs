@@ -41,7 +41,9 @@ defmodule Spaces.Mixfile do
      {:httpoison, "~> 0.8.0"},
      {:jsx, "~> 2.8"},
      {:scrivener_ecto, "~> 1.0"},
-     {:phoenix_html_simplified_helpers, "~> 0.4.0"}]
+     {:phoenix_html_simplified_helpers, "~> 0.4.0"},
+     {:ex_doc, "~> 0.12.0", only: [:dev]}
+    ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
