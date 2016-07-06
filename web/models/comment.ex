@@ -22,4 +22,10 @@ defmodule Spaces.Comment do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def for_post(query, post) do
+    from c in query,
+     join: p in assoc(c, :post),
+    where: p.id == ^post.id
+  end
 end
